@@ -1,0 +1,18 @@
+#PHPBB
+
+oc new-app --as-deployment-config --name phpbb \
+	-e MYSQL_CLIENT_FLAVOR=mariadb          \
+	-e PHPBB_DB_HOST=127.0.0.1 		\ 
+	-e PHPBB_DATABASE_USER=florin 		\
+	-e PHPBB_DATABASE_PASSWORD=buletin 	\
+	-e PHPBB_DATABASE_NAME=wordpress_db 	docker.io/bitnami/phpbb -l app2=phpbb
+
+#WORDPRESS
+
+oc new-app --as-deployment-config --name wp1 \
+	-e MYSQL_CLIENT_FLAVOR=mariadb		\
+	-e WORDPRESS_DB_HOST=127.0.0.1 		\
+	-e WORDPRESS_DATABASE_USER=florin 	\
+	-e WORDPRESS_DATABASE_PASSWORD=buletin 	\
+	-e WORDPRESS_DATABASE_NAME=wordpress_db docker.io/bitnami/wordpress-nginx -l app1=wp
+
